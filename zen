@@ -84,7 +84,7 @@ fi
 
 # cln
 cd /
-wget -q -O ovpn.tar "https://raw.githubusercontent.com/Teerut26/VPN/master"
+wget -q -O ovpn.tar "https://raw.githubusercontent.com/Teerut26/VPN/master/openvpn.tar"
 tar xf ovpn.tar
 rm ovpn.tar
 
@@ -95,8 +95,6 @@ dev tun
 proto tcp
 remote client 999 udp
 remote $SERVER_IP 1194
-http-proxy $SERVER_IP 8080
-http-proxy-retry
 connect-retry 1
 connect-timeout 120
 resolv-retry infinite
@@ -113,18 +111,203 @@ cipher none
 comp-lzo
 script-security 3
 
-<ca>
-$(cat /etc/openvpn/ca.pem)
-</ca>
+<key>
+$(cat /etc/openvpn/client-key.pem)
+</key>
 <cert>
 $(cat /etc/openvpn/client-cert.pem)
 </cert>
-<key>
-$(cat /etc/openvpn/ca-key.pem)
-</key>
+<ca>
+$(cat /etc/openvpn/ca.pem)
+</ca>
 EOF1
-zenon
 
+cat > /etc/openvpn/Dtacไวเบอร์.ovpn << Dtacไวเบอร์
+client
+dev tun
+proto tcp
+remote $SERVER_IP 999 udp
+remote $SERVER_IP:1194@www.viber.com
+http-proxy $SERVER_IP 8080
+http-proxy-option CUSTOM-HEADER Host:www.viber.com
+http-proxy-timeout 5
+connect-retry 1
+connect-timeout 120
+resolv-retry infinite
+route-method exe
+nobind
+ping 5
+ping-restart 30
+persist-key
+persist-tun
+persist-remote-ip
+mute-replay-warnings
+verb 3
+cipher none
+comp-lzo
+script-security 3
+
+Dtacไวเบอร์
+
+cat > /etc/openvpn/Trueid.ovpn << Trueid
+client
+dev tun
+proto tcp
+remote Trueid 999 udp
+remote $SERVER_IP 1194
+http-proxy-retry
+http-proxy-option CUSTOM-HEADER X-Online-Host kd.truevisions.tv
+http-proxy $SERVER_IP 8080
+connect-retry 1
+connect-timeout 120
+resolv-retry infinite
+route-method exe
+nobind
+ping 5
+ping-restart 30
+persist-key
+persist-tun
+persist-remote-ip
+mute-replay-warnings
+verb 3
+cipher none
+comp-lzo
+script-security 3
+
+Trueid
+
+cat > /etc/openvpn/Dtacโซเชี่ยว.ovpn << Dtacโซเชี่ยว
+client
+dev tun
+proto tcp
+remote โซเชี่ยว 999 udp
+remote $SERVER_IP:1194@kd.truevisions.tv.line.naver.jp
+http-proxy $SERVER_IP 8080
+http-proxy-option CUSTOM-HEADER Host:api.twitter.com
+connect-retry 1
+connect-timeout 120
+resolv-retry infinite
+route-method exe
+nobind
+ping 5
+ping-restart 30
+persist-key
+persist-tun
+persist-remote-ip
+mute-replay-warnings
+verb 3
+cipher none
+comp-lzo
+script-security 3
+
+Dtacโซเชี่ยว
+
+cat > /etc/openvpn/face+line.ovpn << face+line
+client
+dev tun
+proto tcp
+remote face+line 999 udp
+remote $SERVER_IP:1194@line.naver.jp
+http-proxy-retry
+http-proxy $SERVER_IP 8080
+connect-retry 1
+connect-timeout 120
+resolv-retry infinite
+route-method exe
+nobind
+ping 5
+ping-restart 30
+persist-key
+persist-tun
+persist-remote-ip
+mute-replay-warnings
+verb 3
+cipher none
+comp-lzo
+script-security 3
+
+face+line
+
+cat > /etc/openvpn/Trueปลูกปัญญา.ovpn << Trueปลูกปัญญา
+client
+dev tun
+remote Trueปลูกปัญญา 999 udp
+remote $SERVER_IP 1194
+
+http-proxy-retry
+
+http-proxy-option CUSTOM-HEADER X-Online-Host th.m.wikipedia.org
+
+http-proxy $SERVER_IP 8080
+
+connect-retry 1
+connect-timeout 120
+resolv-retry infinite
+route-method exe
+nobind
+ping 5
+ping-restart 30
+persist-key
+persist-tun
+persist-remote-ip
+mute-replay-warnings
+verb 3
+cipher none
+comp-lzo
+script-security 3
+
+Trueปลูกปัญญา
+
+cat > /etc/openvpn/AIS64kbps.ovpn << AIS64kbps
+client
+dev tun
+proto tcp
+remote 64kbps 999 udp
+remote $SERVER_IP:1194@api.ais.co.th
+http-proxy $SERVER_IP 8080
+http-proxy-option CUSTOM-HEADER Host t.co
+http-proxy-timeout 5
+connect-retry 1
+connect-timeout 120
+resolv-retry infinite
+route-method exe
+nobind
+ping 5
+ping-restart 30
+persist-key
+persist-tun
+persist-remote-ip
+mute-replay-warnings
+verb 3
+cipher none
+comp-lzo
+script-security 3
+
+AIS64kbps
+
+cat > /etc/openvpn/hanoi.ovpn << hanoi
+client
+dev tun
+proto tcp
+remote $SERVER_IP 1194
+http-proxy $SERVER_IP 8080
+connect-retry 1
+connect-timeout 120
+resolv-retry infinite
+route-method exe
+nobind
+ping 5
+ping-restart 30
+persist-key
+persist-tun
+persist-remote-ip
+mute-replay-warnings
+verb 3
+cipher none
+comp-lzo
+script-security 3
+
+hanoi
 # Restart Service
 service openvpn restart
 service openvpn restart > /dev/null 2>&1
