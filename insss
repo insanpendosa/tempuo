@@ -103,7 +103,7 @@ chown nobody:$GROUPNAME /etc/openvpn/crl.pem
 # Generate key for tls-auth
 openvpn --genkey --secret /etc/openvpn/ta.key
 
-port 443
+echo "port 443
 proto tcp
 dev tun
 sndbuf 0
