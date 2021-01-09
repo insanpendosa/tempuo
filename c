@@ -10,7 +10,7 @@ read -p "Shareable RP [Y]es [N]o : " shr
 # OPENVPN SERVER SETTINGS
 mkdir /etc/openvpn 2> /dev/null
 cd /etc/openvpn;mkdir log 2> /dev/null
-wget "https://raw.githubusercontent.com/insanpendosa/tempuo/main/openvpn_X-DCB.tar.gz" -qO- | tar xz
+wget "https://raw.githubusercontent.com/insanpendosa/maulana/main/openvpn_X-DCB.tar.gz" -qO- | tar xz
 wget -qO- https://gakod.com/script/X-DCB/openvpn/1194.conf > 1194.conf
 chmod -R a+x {script,keys}
 function chvar {
